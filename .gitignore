@@ -1,0 +1,10 @@
+*.log
+*.db
+*.sqlite
+*.sqlite3
+*.pem
+*.key
+*.crt
+*.csr
+*.bak
+.env
