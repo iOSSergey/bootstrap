@@ -1,22 +1,17 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-SCRIPTS=(
-  "01-base-debian12.sh"
-  "02-install-3xui.sh"
-  "03-shell-aliases.sh"
-  "04-firewall-vpn-ports.sh"
-)
+mkdir -p ~/bootstrap
 
-for script in "${SCRIPTS[@]}"; do
-  echo
-  echo "======================================"
-  echo "RUNNING: $script"
-  echo "======================================"
+if [ ! -d ~/bootstrap/.git ]; then
+  git clone https://github.com/iOSSergey/bootstrap.git ~/bootstrap
+else
+  git -C ~/bootstrap pull
+fi
 
-  chmod +x "$script"
-  ./"$script"
-done
+find ~/bootstrap -type f -name "*.sh" -exec chmod +x {} \;
 
+echo "Bootstrap installed"
 echo
-echo "Bootstrap complete"
+echo "Run:"
+echo "cd ~/bootstrap && ./install.sh"
